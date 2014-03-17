@@ -23,7 +23,7 @@ module TorrentFinder
 
     def run
       require "torrent-finder/adapters/#{@site}_adapter"
-      adapter_clazz = TorrentFinder::Adapters::Registry.adapters.first
+      adapter_clazz = TorrentFinder::Adapters::Registry.adapters.find{|adapter| adapter.name == @site }
       adapter = adapter_clazz.new
 
       if @keywords

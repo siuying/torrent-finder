@@ -4,11 +4,11 @@ require 'torrent-finder/adapters/eztv_adapter'
 describe TorrentFinder::Adapters::EztvAdapter do
   context "#name" do
     it "should be eztv" do 
-      expect(subject.name).to eq("eztv")
+      expect(TorrentFinder::Adapters::EztvAdapter.name).to eq("eztv")
     end
   end
 
-  context "#list", :vcr => :new_episode do
+  context "#list", :vcr => {:record => :new_episodes} do
     it "should list first page of torrent" do
       list = subject.list
       expect(list).to be_a(Array)
@@ -16,7 +16,7 @@ describe TorrentFinder::Adapters::EztvAdapter do
     end
   end
 
-  context "#search", :vcr => :new_episode do
+  context "#search", :vcr => {:record => :new_episodes} do
     it "should search torrent" do
       list = subject.search("Top Gear")
       expect(list).to be_a(Array)

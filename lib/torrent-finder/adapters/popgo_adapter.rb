@@ -6,7 +6,7 @@ module TorrentFinder
   module Adapters
     class PopgoAdapter < Adapter
       # name of the adapter
-      def name
+      def self.name
         "popgo"
       end
 

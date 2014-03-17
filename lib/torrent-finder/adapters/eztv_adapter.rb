@@ -7,7 +7,7 @@ module TorrentFinder
   module Adapters
     class EztvAdapter < Adapter
       # name of the adapter
-      def name
+      def self.name
         "eztv"
       end
 
@@ -23,7 +23,7 @@ module TorrentFinder
         agent = Mechanize.new
         agent.get 'http://eztv.it'
         search_form = agent.page.form('search')
-        search_form.SearchString1 = "Cosmos"
+        search_form.SearchString1 = terms
         search_form.submit
         parse_html(agent.page)
       end

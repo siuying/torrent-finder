@@ -4,11 +4,11 @@ require 'torrent-finder/adapters/popgo_adapter'
 describe TorrentFinder::Adapters::PopgoAdapter do
   context "#name" do
     it "should be eztv" do 
-      expect(subject.name).to eq("popgo")
+      expect(TorrentFinder::Adapters::PopgoAdapter.name).to eq("popgo")
     end
   end
 
-  context "#list", :vcr => :new_episode do
+  context "#list", :vcr => {:record => :new_episodes} do
     it "should list first page of torrent" do
       list = subject.list
       expect(list).to be_a(Array)
@@ -20,7 +20,7 @@ describe TorrentFinder::Adapters::PopgoAdapter do
     end
   end
 
-  context "#search", :vcr => :new_episode do
+  context "#search", :vcr => {:record => :new_episodes} do
     it "should search torrent" do
       list = subject.search("Magi")
       expect(list).to be_a(Array)
