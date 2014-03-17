@@ -4,19 +4,20 @@ module TorrentFinder
   class Command < CLAide::Command
     self.description = 'Find recent torrent or search specific torrent.'
     self.command = 'torrent-find'
+    self.arguments = '[Search]'
 
     def self.options
       [
         ['--peerflix', 'launch peerflix with first matched result'],
-        ['--site=site', 'use site, default popgo'],
-        ['--search=keywords', 'search keywords instead of find recent torrent']
+        ['--site=site', 'use site, default popgo']
       ].concat(super)
     end
 
     def initialize(argv)
       @use_peerflix = argv.flag?('peerflix', false)
       @site = argv.option('site', "popgo")
-      @keywords = argv.option('search')
+      @keywords = argv.shift_argument
+
       super
     end
 

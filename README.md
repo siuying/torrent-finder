@@ -21,13 +21,13 @@ Or install it yourself as:
 Search "Magi" on popgo, then launch peerflix with first result.
 
 ```
-$ torrent-finder --site=popgo --search=Magi --peerflix
+$ torrent-finder Magi --site=popgo --peerflix
 ```
 
-Search "Carl Sagans Cosmos" on extv, and list the result.
+Search "Carl Sagans Cosmos" on eztv, and list the result.
 
 ```
-$ torrent-finder --site=eztv --search="Carl Sagans Cosmos"
+$ torrent-finder "Carl Sagans Cosmos" --site=eztv
 ```
 
 ## Sites
