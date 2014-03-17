@@ -18,16 +18,19 @@ Or install it yourself as:
 
 ## Usage
 
-Search "Magi" on popgo, then launch peerflix with first result.
-
-```
-$ torrent-finder Magi --site=popgo --peerflix
-```
-
-Search "Carl Sagans Cosmos" on eztv, and list the result.
+To search "Carl Sagans Cosmos" on eztv, and list the result.
 
 ```
 $ torrent-finder "Carl Sagans Cosmos" --site=eztv
+```
+
+
+If you have [peerflix](https://github.com/mafintosh/peerflix) install, you can launch peerflix with the torrent. 
+
+To search "Magi" on popgo, then launch peerflix with first result.
+
+```
+$ torrent-finder Magi --site=popgo --peerflix
 ```
 
 ## Sites
