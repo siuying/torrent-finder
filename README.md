@@ -1,12 +1,12 @@
-# Torrent::Find
+# TorrentFinder
 
-TODO: Write a gem description
+Extensible command line tool to search torrent.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'torrent-find'
+    gem 'torrent-finder'
 
 And then execute:
 
@@ -14,11 +14,28 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install torrent-find
+    $ gem install torrent-finder
 
 ## Usage
 
-TODO: Write usage instructions here
+Search "Magi" on popgo, then launch peerflix with first result.
+
+```
+$ torrent-finder --site=popgo --search=Magi --peerflix
+```
+
+Search "Carl Sagans Cosmos" on extv, and list the result.
+
+```
+$ torrent-finder --site=eztv --search="Carl Sagans Cosmos"
+```
+
+## Sites
+
+Currently following sites are supported:
+
+- popgo
+- eztv
 
 ## Contributing
 

@@ -7,7 +7,7 @@ module TorrentFinder
 
     def self.options
       [
-        ['--peerflix', 'launch peerflix with first match'],
+        ['--peerflix', 'launch peerflix with first matched result'],
         ['--site=site', 'use site, default popgo'],
         ['--search=keywords', 'search keywords instead of find recent torrent']
       ].concat(super)
@@ -16,7 +16,7 @@ module TorrentFinder
     def initialize(argv)
       @use_peerflix = argv.flag?('peerflix', false)
       @site = argv.option('site', "popgo")
-      @search = argv.option('search')
+      @keywords = argv.option('search')
       super
     end
 
@@ -24,10 +24,19 @@ module TorrentFinder
       require "torrent-finder/adapters/#{@site}_adapter"
       adapter_clazz = TorrentFinder::Adapters::Registry.adapters.first
       adapter = adapter_clazz.new
-      if @search
-        puts adapter.search(@search)
+
+      if @keywords
+        torrents = adapter.search(@keywords)
       else
-        puts adapter.list
+        torrents = adapter.list
+      end
+      if @use_peerflix
+        torrent = torrents.find {|torrent| torrent.name.include?(@keywords) } || torrents.first
+        exec %{peerflix #{torrent.url} --vlc}
+      else
+        torrents.each do |torrent|
+          puts "#{torrent.name},#{torrent.url}"
+        end
       end
     end
   end
