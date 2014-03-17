@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'torrent-finder/adapters/popgo_adapter'
 
 describe TorrentFinder::Adapters::PopgoAdapter do
   context "#name" do
@@ -12,6 +13,10 @@ describe TorrentFinder::Adapters::PopgoAdapter do
       list = subject.list
       expect(list).to be_a(Array)
       expect(list.any?{|item| item[:name] =~ /伪恋/}).to be_true
+      url = list.find{|item| item.name.include? "伪恋"}.url
+
+      expect(url).to be_include("https://share.popgo.org/downseed")
+      expect(url).to be_include("c969a5a34caac2e89718c4ed3336eb3e728be586")
     end
   end
 

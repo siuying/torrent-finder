@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'torrent-finder/adapters/eztv_adapter'
 
 describe TorrentFinder::Adapters::EztvAdapter do
   context "#name" do

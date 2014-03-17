@@ -4,7 +4,7 @@ require 'httparty'
 
 module TorrentFinder
   module Adapters
-    class EztvAdapter
+    class EztvAdapter < Adapter
       # name of the adapter
       def name
         "eztv"
@@ -30,8 +30,8 @@ module TorrentFinder
         rows.collect do |row| 
           name = row.xpath('./td[2]').text.strip
           url = row.css('td > a.download_1').first['href'] rescue nil
-          {:name => name, :url => url}
-        end.select {|row| row[:name] && row[:url] }
+          Torrent.new(name, url)
+        end.select {|row| row.name && row.url }
       end
     end
   end

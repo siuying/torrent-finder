@@ -4,7 +4,7 @@ require 'httparty'
 
 module TorrentFinder
   module Adapters
-    class PopgoAdapter
+    class PopgoAdapter < Adapter
       # name of the adapter
       def name
         "popgo"
@@ -31,12 +31,12 @@ module TorrentFinder
           seed = row.xpath('.//*[@class="inde_tab_seedname"]').first
           if seed
             name = seed.text.strip rescue nil
-            url = seed["href"] rescue nil
-            hash = url.match(%r{program-([a-zA-Z9-9]+)\.html})[1] rescue nil
+            url =  seed.search('a/@href').text rescue nil
+            hash = url.match(%r{program-([a-zA-Z0-9]+)\.html})[1] rescue nil
           end
 
-          {:name => name, :url => "https://share.popgo.org/downseed.php?hash=#{hash}"}
-        end.select {|row| row[:name] && row[:url] }
+          Torrent.new(name, "https://share.popgo.org/downseed.php?hash=#{hash}")
+        end.select {|row| row.name && row.url }
       end
     end
   end
