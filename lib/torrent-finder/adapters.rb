@@ -20,3 +20,4 @@ module TorrentFinder
 end
 
 require_relative './adapters/eztv_adapter'
+require_relative './adapters/popgo_adapter'
