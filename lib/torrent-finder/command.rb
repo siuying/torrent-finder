@@ -7,7 +7,7 @@ module TorrentFinder
   class Command < CLAide::Command
     self.description = 'Find recent torrent or search specific torrent.'
     self.command = 'torrent-find'
-    self.arguments = [CLAide::Argument.new(:search, nil),]
+    self.arguments = [CLAide::Argument.new("search", nil),]
 
     def self.options
       [
@@ -47,7 +47,7 @@ module TorrentFinder
 
       if @use_peerflix
         torrent = torrents.find {|torrent| torrent.name.include?(@keywords) } || torrents.first
-        exec %{peerflix #{torrent.url} --vlc}
+        exec %{peerflix "#{torrent.url}" --vlc -r}
       else
         torrents.each do |torrent|
           puts "#{torrent.name},#{torrent.url}"
