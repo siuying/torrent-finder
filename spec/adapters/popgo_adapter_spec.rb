@@ -12,7 +12,7 @@ describe TorrentFinder::Adapters::PopgoAdapter do
     it "should list first page of torrent" do
       list = subject.list
       expect(list).to be_a(Array)
-      expect(list.any?{|item| item[:name] =~ /伪恋/}).to be_true
+      expect(list.any?{|item| item[:name] =~ /伪恋/}).to be_truthy
       url = list.find{|item| item.name.include? "伪恋"}.url
 
       expect(url).to be_include("https://share.popgo.org/downseed")
@@ -24,7 +24,7 @@ describe TorrentFinder::Adapters::PopgoAdapter do
     it "should search torrent" do
       list = subject.search("Magi")
       expect(list).to be_a(Array)
-      expect(list.any?{|item| item[:name] =~ /魔笛/}).to be_true
+      expect(list.any?{|item| item[:name] =~ /魔笛/}).to be_truthy
     end
   end
 end
