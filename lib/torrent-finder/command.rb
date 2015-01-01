@@ -4,7 +4,7 @@ module TorrentFinder
   class Command < CLAide::Command
     self.description = 'Find recent torrent or search specific torrent.'
     self.command = 'torrent-find'
-    self.arguments = '[Search]'
+    self.arguments = [CLAide::Argument.new(:search, nil),]
 
     def self.options
       [
