@@ -31,11 +31,10 @@ module TorrentFinder
       protected
       def parse_html(doc)
         doc = Nokogiri::HTML(doc) if doc.is_a?(String)
-        rows = doc.search("#tooltip ~ table > tr")
+        rows = doc.search(".forum_header_border")
         rows.collect do |row| 
-          name = row.xpath('./td[2]').text.strip
-          url =  row.css('td > a').collect {|a| a['href'] }.select {|link| link =~ /\.torrent$/}.last rescue nil
-          url = "http:#{url}" if url =~ %r{^//}
+          name = row.search(".forum_thread_post .epinfo").first.text rescue nil
+          url =  row.search(".forum_thread_post .magnet").first["href"] rescue nil
           Torrent.new(name, url)
         end.select {|row| row.name && row.url }
       end
