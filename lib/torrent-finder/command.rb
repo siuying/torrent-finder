@@ -27,14 +27,17 @@ module TorrentFinder
     end
 
     def run
-      require "torrent-finder/adapters/#{@site}_adapter"
-
       if @list
         puts "Available Sites: " + TorrentFinder::Adapters::Registry.adapters.collect {|a| a.name }.join(", ")
         return
       end
 
       adapter_clazz = TorrentFinder::Adapters::Registry.adapters.find{|adapter| adapter.name == @site }
+      unless adapter_clazz
+        puts "Not supported: #{@site}"  
+        return     
+      end
+
       adapter = adapter_clazz.new
       if @keywords
         torrents = adapter.search(@keywords)
