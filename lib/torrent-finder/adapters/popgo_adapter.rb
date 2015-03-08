@@ -31,11 +31,12 @@ module TorrentFinder
           seed = row.xpath('.//*[@class="inde_tab_seedname"]').first
           if seed
             name = seed.text.strip rescue nil
-            url =  seed.search('a/@href').text rescue nil
-            hash = url.match(%r{program-([a-zA-Z0-9]+)\.html})[1] rescue nil
           end
 
-          Torrent.new(name, "https://share.popgo.org/downseed.php?hash=#{hash}")
+          link = row.xpath('.//a[@title="下载种子"]').first
+          url =  link["href"] rescue nil
+
+          Torrent.new(name, url)
         end.select {|row| row.name && row.url }
       end
     end

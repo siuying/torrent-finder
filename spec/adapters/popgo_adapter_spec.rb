@@ -12,11 +12,9 @@ describe TorrentFinder::Adapters::PopgoAdapter do
     it "should list first page of torrent" do
       list = subject.list
       expect(list).to be_a(Array)
-      expect(list.any?{|item| item[:name] =~ /伪恋/}).to be_truthy
-      url = list.find{|item| item.name.include? "伪恋"}.url
-
-      expect(url).to be_include("https://share.popgo.org/downseed")
-      expect(url).to be_include("c969a5a34caac2e89718c4ed3336eb3e728be586")
+      expect(list.any?{|item| item[:name] =~ /高达G之复国/}).to be_truthy
+      url = list.find{|item| item.name.include? "高达G之复国"}.url
+      expect(url).to be_include("magnet:?xt=urn:btih:BQGYKB7WR2CMAXHO53IUDGERWVEMTFQK&tr=http://t2.popgo.org:7456/annonce")
     end
   end
 

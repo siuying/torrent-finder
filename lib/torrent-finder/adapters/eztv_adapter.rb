@@ -13,7 +13,7 @@ module TorrentFinder
 
       # list recently available torrent
       def list(page=0)
-        url = page == 0 ? "http://eztv.it" : "http://eztv.it/page_#{page.to_s}"
+        url = page == 0 ? "https://eztv.ch" : "http://eztv.ch/page_#{page.to_s}"
         response = HTTParty.get(url)
         parse_html(response.body)
       end
@@ -21,7 +21,7 @@ module TorrentFinder
       # search and return available torrent
       def search(terms)
         agent = Mechanize.new
-        agent.get 'http://eztv.it'
+        agent.get 'https://eztv.ch'
         search_form = agent.page.form('search')
         search_form.SearchString1 = terms
         search_form.submit

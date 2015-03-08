@@ -13,7 +13,7 @@ describe TorrentFinder::Adapters::NyaaAdapter do
       list = subject.list
       expect(list).to be_a(Array)
       expect(list.size > 0).to be_truthy
-      expect(list.any?{|item| item[:name] =~ /Denpa Onna to Seishun Otoko/}).to be_truthy
+      expect(list.any?{|item| item[:name] =~ /こちら葛飾区亀有公園前派出所/}).to be_truthy
     end
   end
 

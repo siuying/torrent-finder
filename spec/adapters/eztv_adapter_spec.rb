@@ -12,7 +12,7 @@ describe TorrentFinder::Adapters::EztvAdapter do
     it "should list first page of torrent" do
       list = subject.list
       expect(list).to be_a(Array)
-      expect(list.any?{|item| item[:name] =~ /Astronauts Houston/}).to be_truthy
+      expect(list.any?{|item| item[:name] =~ /King Of The Nerds/}).to be_truthy
     end
   end
 
