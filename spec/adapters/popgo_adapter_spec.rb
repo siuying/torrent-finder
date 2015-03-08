@@ -3,7 +3,7 @@ require 'torrent-finder/adapters/popgo_adapter'
 
 describe TorrentFinder::Adapters::PopgoAdapter do
   context "#name" do
-    it "should be eztv" do 
+    it "should be popgo" do 
       expect(TorrentFinder::Adapters::PopgoAdapter.name).to eq("popgo")
     end
   end
@@ -23,6 +23,7 @@ describe TorrentFinder::Adapters::PopgoAdapter do
       list = subject.search("Magi")
       expect(list).to be_a(Array)
       expect(list.any?{|item| item[:name] =~ /魔笛/}).to be_truthy
+      expect(list.all?{|item| item[:url] =~ /^magnet/}).to be_truthy
     end
   end
 end

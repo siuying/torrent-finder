@@ -1,38 +1,41 @@
 require 'nokogiri'
 require 'open-uri'
 require 'httparty'
+require 'mechanize'
 
 module TorrentFinder
   module Adapters
-    class PopgoAdapter < Adapter
+    class DmhyAdapter < Adapter
       # name of the adapter
       def self.name
-        "popgo"
+        "dmhy"
       end
 
       # list recently available torrent
       def list(page=0)
-        url = page == 0 ? "http://share.popgo.org/" : "http://share.popgo.org/search.php?title=&groups=&uploader=&sorts=&orderby=&page=#{(page+1).to_s}"
+        url = page == 0 ? "http://share.dmhy.org/" : "http://share.dmhy.org/topics/list/page/#{(page+1).to_s}"
         response = HTTParty.get(url)
         parse_html(response.body)
       end
 
       # search and return available torrent
       def search(terms)
-        response = HTTParty.get("http://share.popgo.org/search.php", :query => {"title" => terms})
+        response = HTTParty.get("http://share.dmhy.org/topics/list", :query => {"keyword" => terms})
         parse_html(response.body)
       end
 
       protected
       def parse_html(html)
         doc = Nokogiri::HTML(html)
-        rows = doc.search("#index_maintable tr")
+        rows = doc.search("#topic_list tr")
         rows.collect do |row| 
-          seed = row.xpath('.//*[@class="inde_tab_seedname"]').first
-          name = seed.text.strip rescue nil
-          url = row.xpath('.//a[@title="下载种子"]').first["href"] rescue nil
-
-          Torrent.new(name, url)
+          title = row.search('.title').first
+          if title
+            title.search(".tag").remove
+            name = title.text.strip
+          end
+          link = row.search('a.arrow-magnet').first["href"] rescue nil
+          Torrent.new(name, link)
         end.select {|row| row.name && row.url }
       end
     end

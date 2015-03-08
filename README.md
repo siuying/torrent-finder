@@ -38,6 +38,8 @@ $ torrent-finder Magi --site=popgo --peerflix
 Currently following sites are supported:
 
 - popgo
+- dmhy
+- nyaa
 - eztv
 
 ## Contributing

@@ -1,5 +1,6 @@
 require 'claide'
 require 'torrent-finder/adapters/popgo_adapter'
+require 'torrent-finder/adapters/dmhy_adapter'
 require 'torrent-finder/adapters/eztv_adapter'
 require 'torrent-finder/adapters/nyaa_adapter'
 
