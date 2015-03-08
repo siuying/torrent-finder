@@ -42,6 +42,18 @@ Currently following sites are supported:
 - nyaa
 - eztv
 
+## Change Logs
+
+0.3.1
+=====
+
+- Add support to add arbitary adapter when running command
+
+0.3.0
+=====
+
+- Add dmhy adapter
+
 ## Contributing
 
 1. Fork it ( http://github.com/siuying/torrent-find/fork )

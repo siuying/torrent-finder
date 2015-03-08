@@ -33,6 +33,12 @@ module TorrentFinder
         return
       end
 
+      begin
+        require "torrent-finder/adapters/#{@site}_adapter"
+      rescue
+        # ignore any error here
+      end
+
       adapter_clazz = TorrentFinder::Adapters::Registry.adapters.find{|adapter| adapter.name == @site }
       unless adapter_clazz
         puts "Not supported: #{@site}"  
