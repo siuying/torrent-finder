@@ -29,14 +29,14 @@ module TorrentFinder
         doc = Nokogiri::HTML(html)
         rows = doc.search("#topic_list tr")
         rows.collect do |row| 
-          title = row.search('.title').first
+          title = row.search('td.title').first
           if title
             title.search(".tag").remove
-            name = title.text.strip
+            name = title.search('./a').first.text.strip
           end
           link = row.search('a.arrow-magnet').first["href"] rescue nil
           Torrent.new(name, link)
-        end.select {|row| row.name && row.url }
+        end.select {|row| row.name && row.url && row.url != "" }
       end
     end
   end
